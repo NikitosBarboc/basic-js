@@ -17,8 +17,14 @@ const HALF_LIFE_PERIOD = 5730;
  * dateSample('WOOT!') => false
  *
  */
-function dateSample(/* sampleActivity */) {
-  throw new NotImplementedError('Not implemented');
+function dateSample(number) {
+  // if(number == "NaN")  {
+
+  // }
+  if(!Number(number) == !NaN || number !== String(number) || number > 15 || number <= 0) {
+    return false
+  }
+  return Math.trunc(Math.log(15/number) / (Math.log(2) /5730) )  +1
   // remove line with error and write your code here
 }
 
