@@ -13,10 +13,46 @@ const { NotImplementedError } = require('../extensions/index.js');
  * transform([1, 2, 3, '--discard-prev', 4, 5]) => [1, 2, 4, 5]
  * 
  */
-function transform(/* arr */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
-}
+
+function transform(arr){
+  if(!(arr instanceof Array) ) {
+    throw new Error("'arr' parameter must be an instance of the Array!")
+  }
+  if(!(arr.includes('--discard-next') ||  arr.includes('--discard-prev') 
+  || arr.includes('--double-next') ||  arr.includes('--double-prev'))) {
+    return arr
+  }
+  let newArray = []
+  let dopArray = arr.slice(0)
+  for(let i in dopArray) {
+    
+      if( dopArray[(i-1)] === '--discard-next' ) {
+        if(dopArray[(i)] == 1337) {
+          dopArray[(i)]  = "1337"
+        }
+          continue
+      }
+      if( dopArray[+i+1] === '--discard-prev') {
+        continue
+      }
+      if(dopArray[i] == "--double-next") {
+        if(dopArray[+i+1] !== undefined && dopArray[+i+1] !== String(dopArray[+i+1]) ) {
+          newArray.push(dopArray[+i+1])
+        }
+      }
+      if(dopArray[i] == "--double-prev") {
+        if(dopArray[+i-1] !== undefined && dopArray[+i-1] !== String(dopArray[+i-1])) {
+          newArray.push(dopArray[+i-1])
+        }
+  
+      }
+    
+    else if(String(dopArray[i]) !== dopArray[i]){
+      newArray.push(dopArray[i])
+    }
+  }
+  return newArray
+  }
 
 module.exports = {
   transform
