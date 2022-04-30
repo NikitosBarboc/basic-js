@@ -4,26 +4,56 @@ const { NotImplementedError } = require('../extensions/index.js');
  * Implement chainMaker object according to task description
  * 
  */
-const chainMaker = {
+ const chainMaker = {
   getLength() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    let arr = Array.from(this.value).join("").split("~~").length;
+    if(this.value[this.value.length -1] == "~") {
+       arr -=  1
+    }
+   return arr
   },
-  addLink(/* value */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  value: "",
+  addLink(value = "" ) {
+    this.value += `( ${value} )` + "~~"
+    return this
   },
-  removeLink(/* position */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  removeLink(position ) {
+    if(position >= (this.getLength() + 1) || position <= 0 || position !==Math.floor(position)) {
+      this.value = ""
+      throw new Error('You can\'t remove incorrect link!')
+    }
+  else {
+   let arr = Array.from(this.value).join("").split("~~")
+   let del = arr[position-1]
+   this.value = this.value.replace(`${del}~~`, "")
+  }
+    return this
   },
   reverseChain() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    
+    let arr = Array.from(this.value).join("").split("~~");
+    
+    this.value = arr.reverse().join("~~")
+    if(this.value[this.value.length -1 ] != "~") {
+      this.value+= "~~"
+    }
+    if(this.value[0] == "~") {
+      this.value = this.value.replace("~~", "")
+    }
+    return this
   },
   finishChain() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    if(this.value[0] == "~") {
+      this.value =  this.value.slice(2)
+    }
+    if(this.value[this.value.length -1 ] == "~") {
+      this.value = this.value.slice(0, -2)
+    }
+    let a = this.value
+    this.value = ""
+    return a
+    
+    
   }
 };
 
