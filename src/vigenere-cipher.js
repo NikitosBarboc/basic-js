@@ -22,9 +22,11 @@ const { NotImplementedError } = require('../extensions/index.js');
 class VigenereCipheringMachine {
   constructor(value) {
     if(value === true || value === undefined) {
-
+      this.encrypt()
     }
-    else {}
+    else {
+      this.decrypt()
+    }
   }
   encrypt() {
 
