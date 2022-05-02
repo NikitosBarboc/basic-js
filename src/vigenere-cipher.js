@@ -21,18 +21,38 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 class VigenereCipheringMachine {
   constructor(value) {
-    if(value === true || value === undefined) {
-      this.encrypt()
-    }
-    else {
-      this.decrypt()
+    this.reverse = false
+    if(value === false) {
+      this.reverse = true
     }
   }
-  encrypt() {
-
+  encrypt(message, key) {
+    if(!message || !key) {
+      throw new Error("Incorrect arguments!")
+    }
+    // massage = massage.toUpperCase()
+    // if(this.reverse == true) {
+    //   massage = massage.split("")
+    //   massage = massage.reverse()
+    //   massage.join("")
+    // }
+    // for(let i = 0, j = 0; i < massage.length; i++) {
+    //   let letter = massage[i].charCodeAt()
+    //   // if(letter >= 97 && letter <= 122) {
+        
+    //   // }
+    // }
   }
-  decrypt() {
-
+  decrypt(encryptedMessage, key) {
+    if(!encryptedMessage || !key) {
+      throw new Error("Incorrect arguments!")
+    }
+    // encryptedMessage = encryptedMessage.toUpperCase()
+    // if(this.reverse == true) {
+    //   massage = massage.split("")
+    //   massage = massage.reverse()
+    //   massage.join("")
+    // }
   }
 }
 
