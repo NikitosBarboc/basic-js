@@ -24,20 +24,27 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 function getDNSStats( domains ) {
   let result = {}
-  let arr = []
-  for(let i in domains) {
-    arr = domains[i].split(".")
-    arr.reverse()
-    for(let u in arr) {
-      if(result["." + arr[u]] != undefined) {
-        result["." + arr[u]] += +1
-      }
-      else {
-        result["." + arr[u]] = 1;
-      }
+  for(let j in domains) {
+    let arrOld = domains[j].split(".")
+  
+    
+  for(let i in arrOld) {
+    let arr = arrOld.slice(i)
+    if(i == 0) {
+      arr.reverse()
     }
-   
+    if(i == 1) {
+      arr.reverse()
+    }
+    arr = "." + arr.join(".")
+    if(result[arr]) {
+      result[arr] += 1
+    } else {
+      result[arr] = 1;
+    }
+    
   }
+}
 
   return result
   // remove line with error and write your code here
